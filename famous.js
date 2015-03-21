@@ -72,6 +72,7 @@ if (Meteor.isClient) {
             return Session.get('photo');
         }
     });
+
     Template.launchCamera.events({
         'click button': function(event, template){
 
@@ -87,7 +88,7 @@ if (Meteor.isClient) {
                 }
                 else
                 {
-                    Session.set("photo", data);
+                    Session.set('photo', data);
                 }
             };
 
