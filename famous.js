@@ -79,7 +79,8 @@ if (Meteor.isClient) {
             var cameraOptions = {
                 width: 640,
                 height: 640,
-                quality: 100
+                quality: 100,
+                correctOrientation: true
             };
 
             var cameraCallback = function(error, data){

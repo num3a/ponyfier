@@ -1,6 +1,6 @@
 Package.describe({
   name: 'num3a:camera',
-  version: '1.0.2',
+  version: '1.0.4',
   // Brief, one-line summary of the package.
   summary: 'Photos with one function call on desktop and mobile.',
   // URL to the Git repository containing the source code for this package.
@@ -8,6 +8,10 @@ Package.describe({
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
   documentation: 'README.md'
+});
+
+Cordova.depends({
+    "org.apache.cordova.camera":"0.3.6"
 });
 
 Package.onUse(function(api) {

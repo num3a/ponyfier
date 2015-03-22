@@ -18,7 +18,7 @@ MeteorCamera.getPicture = function (options, callback) {
       quality: options.quality || 49,
       targetWidth: options.width || 640,
       targetHeight: options.height || 480,
-      destinationType: Camera.DestinationType.DATA_URL,
+      destinationType: 0,
         correctOrientation : options.correctOrientation
     })
   );
