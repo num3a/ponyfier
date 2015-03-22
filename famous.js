@@ -3,66 +3,38 @@ if (Meteor.isServer) {
 
 }
 
-var drawFamousOrbital = function () {
-    var Engine = famous.core.Engine;
-    var Surface = famous.core.Surface;
-    var Transform = famous.core.Transform;
-    var StateModifier = famous.modifiers.StateModifier;
+var detectFace = function(){
 
-    var mainContext = Engine.createContext();
 
-    var stateModifier = new StateModifier({
-        transform: Transform.translate(50, 50, 0)
+    var img = $('#takenPicture');
+
+    var tracker = new tracking.ObjectTracker(['face','eye','mouth']);
+
+    tracker.setStepSize(1.7);
+
+    tracking.track('#takenPicture',tracker);
+
+    var plot = function(x,y,w,h){
+        var rect = document.createElement('div');
+        document.querySelector('.image-container').appendChild(rect);
+
+        rect.classList.add('rect');
+
+        rect.style.width = w +'px';
+        rect.style.height = h +'px';
+        rect.style.left = (img.offsetLeft + x) + 'px';
+        rect.style.top = (img.offsetTop + y) + 'px';
+    };
+
+    tracker.on('track',function(event){
+        event.data.forEach(function(rect){
+
+            plot(rect.x, rect.y, rect.width, rect.height);
+            console.log('face found');
+        });
     });
 
-    var firstSurface = new Surface({
-        content: "<h3>Hi!</h3><p>I'm a surface!<br>I live inside a context.</p><p>You can add <b>HTML</b> content to me and style me with <b>CSS!</b></p>",
-        size: [200, 200],
-        properties: {
-            backgroundColor: 'rgb(240, 238, 233)',
-            textAlign: 'center',
-            padding: '5px',
-            border: '2px solid rgb(210, 208, 203)',
-            marginTop: '50px',
-            marginLeft: '50px'
-        }
-    });
 
-    var squareOrbitalSurface = new Surface({
-        content: "<span style='color:white'>Interstellar !!</span>",
-        size: [40, 40],
-        properties: {
-            backgroundColor: 'grey'
-        }
-    });
-
-    var orbitalModifier = new StateModifier();
-
-    for (var i = 0; i < 10; i++) {
-        orbitalModifier.setTransform(
-            Transform.translate(0, 300, 0),
-            {duration: 800}
-        );
-
-        orbitalModifier.setTransform(
-            Transform.translate(350, 300, 0),
-            {duration: 800}
-        );
-
-        orbitalModifier.setTransform(
-            Transform.translate(350, 40, 0),
-            {duration: 800}
-        );
-
-        orbitalModifier.setTransform(
-            Transform.translate(0, 0, 0),
-            {duration: 800}
-        );
-    }
-
-
-    mainContext.add(stateModifier).add(firstSurface);
-    mainContext.add(orbitalModifier).add(squareOrbitalSurface);
 };
 
 if (Meteor.isClient) {
@@ -90,6 +62,8 @@ if (Meteor.isClient) {
                 else
                 {
                     Session.set('photo', data);
+
+                    detectFace();
                 }
             };
 
