@@ -1,14 +1,32 @@
 if (Meteor.isServer) {
 
+    Meteor.methods({
+        findFaces : function(){
+            var img = document.getElementById('takenPicture');
+            var results = [];
+            var tracker = new tracking.ObjectTracker(['face']);
 
+            tracker.setStepSize(1.7);
+            tracking.track(img,tracker);
+
+            tracker.on('track',function(event){
+                event.data.forEach(function(rect){
+                    results.push(rect);
+                    console.log('face found');
+                });
+            });
+
+            return results;
+        }
+    });
 }
 
 var detectFace = function(){
 
 
-    var img = $('#takenPicture');
+    var img = document.getElementById('takenPicture');
 
-    var tracker = new tracking.ObjectTracker(['face','eye','mouth']);
+    var tracker = new tracking.ObjectTracker(['face']);
 
     tracker.setStepSize(1.7);
 
@@ -17,13 +35,12 @@ var detectFace = function(){
     var plot = function(x,y,w,h){
         var rect = document.createElement('div');
         document.querySelector('.image-container').appendChild(rect);
-
         rect.classList.add('rect');
-
-        rect.style.width = w +'px';
-        rect.style.height = h +'px';
+        rect.style.width = w + 'px';
+        rect.style.height = h + 'px';
         rect.style.left = (img.offsetLeft + x) + 'px';
         rect.style.top = (img.offsetTop + y) + 'px';
+
     };
 
     tracker.on('track',function(event){
@@ -41,12 +58,19 @@ if (Meteor.isClient) {
 //    drawFamousOrbital();
     Template.launchCamera.helpers({
         photo: function(){
-            return Session.get('photo');
+            return  Session.get('photo');
         }
     });
 
+    Template.launchCamera.gestures({
+        'tap img': function(event,template){
+            console.log('touched', event);
+        }
+    });
     Template.launchCamera.events({
+
         'click button': function(event, template){
+            event.preventDefault();
 
             var cameraOptions = {
                 width: 640,
@@ -62,8 +86,9 @@ if (Meteor.isClient) {
                 else
                 {
                     Session.set('photo', data);
-
+                    var img = document.getElementById('takenPicture');
                     detectFace();
+                   // Meteor.call('findFaces');
                 }
             };
 
@@ -71,5 +96,6 @@ if (Meteor.isClient) {
             console.log('clicked',this);
         }
     });
+
 
 }

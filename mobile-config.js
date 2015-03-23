@@ -12,3 +12,4 @@ App.info({
 
 App.accessRule('http://meteor.local/*');
 App.accessRule('http://*:3000/*');
+App.accessRule('http://trackingjs.com/*');
