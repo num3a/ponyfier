@@ -92,10 +92,35 @@ if (Meteor.isClient) {
                 }
             };
 
-            MeteorCamera.getPicture(cameraOptions,cameraCallback);
+            //MeteorCamera.getPicture(cameraOptions,cameraCallback);
             console.log('clicked',this);
+
+            launchCamera();
         }
     });
+}
+
+var launchCamera = function () {
+    MeteorCanvasCamera.initialize('cvsPhoto');
+
+    var options =
+    {
+        quality: 75,
+        destinationType: 0,
+        sourceType: 1,
+        allowEdit: true,
+        encodingType: 1,
+        correctOrientation: true,
+        saveToPhotoAlbum: false,
+        width: 640,
+        height: 480
+    };
+    MeteorCanvasCamera.start(options);
+};
+if(Meteor.isCordova){
 
 
+    Meteor.startup(function(){
+        launchCamera();
+    });
 }
