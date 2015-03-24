@@ -62,11 +62,6 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.launchCamera.gestures({
-        'tap img': function(event,template){
-            console.log('touched', event);
-        }
-    });
     Template.launchCamera.events({
 
         'click button': function(event, template){
