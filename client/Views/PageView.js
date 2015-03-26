@@ -10,6 +10,7 @@ var FastClick = famous.inputs.FastClick;
 PageView = function () {
     View.apply(this, arguments);
 
+    _createBacking.call(this);
     _createLayout.call(this);
     _createHeader.call(this);
     _createBody.call(this);
@@ -90,4 +91,15 @@ function _setListeners() {
 
     this.bodySurface.pipe(this._eventOutput);
 
+}
+
+function _createBacking() {
+    var backing = new Surface({
+        properties: {
+            backgroundColor: 'black',
+            boxShadow: '0 0 20px rgba(0,0,0,0.5)'
+        }
+    });
+
+    this.add(backing);
 }
