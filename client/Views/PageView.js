@@ -1,10 +1,11 @@
+/* Imports */
 var Surface = famous.core.Surface;
 var View = famous.core.View;
 var Transform = famous.core.Transform;
 var StateModifier = famous.modifiers.StateModifier;
 var HeaderFooter = famous.views.HeaderFooterLayout;
 var ImageSurface = famous.surfaces.ImageSurface;
-
+var FastClick = famous.inputs.FastClick;
 
 PageView = function () {
     View.apply(this, arguments);
@@ -12,15 +13,18 @@ PageView = function () {
     _createLayout.call(this);
     _createHeader.call(this);
     _createBody.call(this);
+    _setListeners.call(this);
 }
-
-PageView.prototype = Object.create(View.prototype);
-PageView.prototype.constructor = PageView;
 
 PageView.DEFAULT_OPTIONS = {
     headerSize: 44
 };
 
+/* Prototype */
+PageView.prototype = Object.create(View.prototype);
+PageView.prototype.constructor = PageView;
+
+/* Functions */
 function _createLayout() {
     this.layout = new HeaderFooter({
         headerSize: this.options.headerSize
@@ -77,4 +81,10 @@ function _createBody() {
     });
 
     this.layout.content.add(this.bodySurface);
+}
+
+function _setListeners() {
+    this.hamburgerSurface.on('click', function() {
+        this._eventOutput.emit('menuToggle');
+    }.bind(this));
 }
