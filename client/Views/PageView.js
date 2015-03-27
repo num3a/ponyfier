@@ -59,6 +59,17 @@ function _createHeader() {
         content: '/pony.png'
     });
 
+    var titleSurface = new Surface({
+        size: [true, true],
+        content: 'PONYFIER',
+        properties: {
+            color: 'white',
+            fontSize: 28 + 'px',
+            textTransform: 'uppercase',
+            pointerEvents : 'none'
+        }
+    });
+
     var hamburgerModifier = new StateModifier({
         origin: [0, 0.5],
         align : [0, 0.5]
@@ -69,10 +80,16 @@ function _createHeader() {
         align : [1, 0.5]
     });
 
+    var titleModifier = new StateModifier({
+        origin: [0.5, 0.5],
+        align : [0.5, 0.5]
+    });
 
     this.layout.header.add(backgroundModifier).add(backgroundSurface);
     this.layout.header.add(hamburgerModifier).add(this.hamburgerSurface);
+    this.layout.header.add(titleModifier).add(titleSurface);
     this.layout.header.add(iconModifier).add(iconSurface);
+
 }
 
 function _createBody() {
