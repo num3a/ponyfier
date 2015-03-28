@@ -38,12 +38,10 @@ AppView.DEFAULT_OPTIONS = {
 
 AppView.StripData = [
     {title: 'Home', iconUrl: '/pony.png'},
-    {title: 'Remove Ads', iconUrl: '/pony.png'},
-    {title: 'Poney Today', iconUrl: '/pony.png'},
     {title: 'Last Ponyfied', iconUrl: '/pony.png'},
+    {title: 'Remove Ads', iconUrl: '/pony.png'},
     {title: 'About', iconUrl: '/pony.png'}
 ];
-
 
 /* Prototype */
 AppView.prototype = Object.create(View.prototype);

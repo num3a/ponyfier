@@ -16,7 +16,7 @@ MenuView.DEFAULT_OPTIONS = {
     angle: -0.2,
     stripWidth: 320,
     stripHeight: 54,
-    topOffset: 37,
+    topOffset: 85,
     stripOffset: 58,
     staggerDelay: 35,
     transition: {
