@@ -37,7 +37,7 @@ function _createButtons(){
         }
     });
 
-    openPictureSurface.on('click',function(){
+    takePictureSurface.on('click',function(){
         var options = {
             width: 300,
             heigth: 300,
