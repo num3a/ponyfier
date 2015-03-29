@@ -98,7 +98,9 @@ function _createBody() {
         content : '/body.png'
     });
 
-    this.layout.content.add(this.bodySurface);
+   // this.layout.content.add(this.bodySurface);
+    var homeView = new HomeView();
+    this.layout.content.add(homeView);
 }
 
 function _setListeners() {
@@ -113,7 +115,7 @@ function _setListeners() {
 function _createBacking() {
     var backing = new Surface({
         properties: {
-            backgroundColor: 'black',
+            backgroundColor: 'white',
             boxShadow: '0 0 20px rgba(0,0,0,0.5)'
         }
     });
