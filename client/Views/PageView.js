@@ -41,7 +41,7 @@ function _createLayout() {
 function _createHeader() {
     var backgroundSurface = new Surface({
         properties: {
-            backgroundColor: 'black'
+            backgroundColor: '#633A80'
         }
     });
 
@@ -51,7 +51,7 @@ function _createHeader() {
 
     this.hamburgerSurface = new ImageSurface({
         size: [44, 44],
-        content: '/hamburger.png'
+        content: '/hamburger-purple.png'
     });
 
     var iconSurface = new ImageSurface({
@@ -63,7 +63,7 @@ function _createHeader() {
         size: [true, true],
         content: 'PONYFIER',
         properties: {
-            color: 'white',
+            color: '#F8B9CE',
             fontSize: 28 + 'px',
             textTransform: 'uppercase',
             pointerEvents : 'none'
@@ -109,13 +109,12 @@ function _setListeners() {
     }.bind(this));
 
     this.bodySurface.pipe(this._eventOutput);
-
 }
 
 function _createBacking() {
     var backing = new Surface({
         properties: {
-            backgroundColor: 'white',
+            backgroundColor: '#5F58A5',
             boxShadow: '0 0 20px rgba(0,0,0,0.5)'
         }
     });

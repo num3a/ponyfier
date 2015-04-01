@@ -20,12 +20,30 @@ HomeView.prototype = Object.create(View.prototype);
 HomeView.prototype.constructor = HomeView;
 
 /* Functions */
+function _takePicture() {
+    var cameraOptions = {
+        width: 300,
+        height: 300,
+        quality: 100,
+        correctOrientation: true
+    };
+
+    MeteorCamera.getPicture(cameraOptions, function (error, data) {
+        if (error) {
+            console.log('An error occurs when taking a photo', error);
+        }
+        else {
+            console.log('picture taken');
+        }
+    });
+}
+
 function _createButtons(){
     var takePictureSurface = new Surface({
         size : [130,130],
         content: Blaze.toHTML(Template.takePictureButton),
         properties: {
-            background : 'pink'
+            background : '#002B56'
         }
     });
 
@@ -33,26 +51,16 @@ function _createButtons(){
         size: [130,130],
         content : Blaze.toHTML(Template.openPictureButton),
         properties: {
-            background: 'violet'
+            background: '#3D74AC'
         }
     });
 
     takePictureSurface.on('click',function(){
-        var options = {
-            width: 300,
-            heigth: 300,
-            quality: 100,
-            correctOrientation: true
-        };
+       // _takePicture();
+        var _mockPicture = function () {
 
-        MeteorCamera.getPicture(options,function(error,data){
-            if(error){
-                console.log('An error occurs when taking a photo',error);
-            }
-            else{
-                console.log('picture taken');
-            }
-        });
+        };
+        _mockPicture();
     });
 
     var takePictureModifier = new StateModifier({

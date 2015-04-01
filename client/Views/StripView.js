@@ -33,7 +33,7 @@ function _createBackground() {
     var backgroundSurface = new Surface({
         size: [this.options.width, this.options.height],
         properties: {
-            backgroundColor: 'black',
+            backgroundColor: '#633A80',
             // on certain devices, a skewed surface can have jagged edges
             // the 1px box-shadow provides some anti-aliasing to soften this
             boxShadow: '0 0 1px rgba(0,0,0,1)'
@@ -74,7 +74,7 @@ function _createTitle() {
         size: [true, true],
         content: this.options.title,
         properties: {
-            color: 'white',
+            color: '#F8B9CE',
             fontSize: this.options.fontSize + 'px',
             textTransform: 'uppercase',
             pointerEvents : 'none'
