@@ -51,12 +51,12 @@ function _createHeader() {
 
     this.hamburgerSurface = new ImageSurface({
         size: [44, 44],
-        content: '/hamburger-purple.png'
+        content: '/hamburger-purple-44.png'
     });
 
     var iconSurface = new ImageSurface({
         size: [44, 44],
-        content: '/pony.png'
+        content: '/pony-purple-44.png'
     });
 
     var titleSurface = new Surface({

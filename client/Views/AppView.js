@@ -37,10 +37,10 @@ AppView.DEFAULT_OPTIONS = {
 };
 
 AppView.StripData = [
-    {title: 'Home', iconUrl: '/pony.png'},
-    {title: 'Last Ponyfied', iconUrl: '/pony.png'},
-    {title: 'Remove Ads', iconUrl: '/pony.png'},
-    {title: 'About', iconUrl: '/pony.png'}
+    {title: 'Home', iconUrl: '/pony-purple-44.png'},
+    {title: 'Last Ponyfied', iconUrl: '/pony-purple-44.png'},
+    {title: 'Remove Ads', iconUrl: '/pony-44.png'},
+    {title: 'About', iconUrl: '/pony-purple-44.png'}
 ];
 
 /* Prototype */
