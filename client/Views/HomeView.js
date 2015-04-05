@@ -4,11 +4,14 @@ var Transform = famous.core.Transform;
 var StateModifier = famous.modifiers.StateModifier;
 var HeaderFooter = famous.views.HeaderFooterLayout;
 var ImageSurface = famous.surfaces.ImageSurface;
+var EventHandler = famous.core.EventHandler;
+
 
 HomeView = function(){
     View.apply(this, arguments);
 
     _createButtons.call(this);
+    _setListeners.call(this);
 }
 
 HomeView.DEFAULT_OPTIONS = {
@@ -19,27 +22,8 @@ HomeView.DEFAULT_OPTIONS = {
 HomeView.prototype = Object.create(View.prototype);
 HomeView.prototype.constructor = HomeView;
 
-/* Functions */
-function _takePicture() {
-    var cameraOptions = {
-        width: 300,
-        height: 300,
-        quality: 100,
-        correctOrientation: true
-    };
-
-    MeteorCamera.getPicture(cameraOptions, function (error, data) {
-        if (error) {
-            console.log('An error occurs when taking a photo', error);
-        }
-        else {
-            console.log('picture taken');
-        }
-    });
-}
-
 function _createButtons(){
-    var takePictureSurface = new Surface({
+    this.takePictureSurface = new Surface({
         size : [130,130],
         content: Blaze.toHTML(Template.takePictureButton),
         properties: {
@@ -47,20 +31,12 @@ function _createButtons(){
         }
     });
 
-    var openPictureSurface = new Surface({
+    this.openPictureSurface = new Surface({
         size: [130,130],
         content : Blaze.toHTML(Template.openPictureButton),
         properties: {
             background: '#3D74AC'
         }
-    });
-
-    takePictureSurface.on('click',function(){
-       // _takePicture();
-        var _mockPicture = function () {
-
-        };
-        _mockPicture();
     });
 
     var takePictureModifier = new StateModifier({
@@ -73,6 +49,15 @@ function _createButtons(){
         align : [0.5, 0.7]
     });
 
-    this.add(takePictureModifier).add(takePictureSurface);
-    this.add(openPictureModifier).add(openPictureSurface);
+    this.add(takePictureModifier).add(this.takePictureSurface);
+    this.add(openPictureModifier).add(this.openPictureSurface);
+}
+
+function _setListeners() {
+
+    this.takePictureSurface.on('click',function(){
+        this._eventOutput.emit('loadEditor');
+    }.bind(this));
+
+    this.openPictureSurface.on('click',function(){});
 }

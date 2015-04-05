@@ -14,6 +14,7 @@ PageView = function () {
     _createLayout.call(this);
     _createHeader.call(this);
     _createBody.call(this);
+
     _setListeners.call(this);
 }
 
@@ -32,7 +33,7 @@ function _createLayout() {
     });
 
     var layoutModifier = new StateModifier({
-        transform: Transform.translate(0, 0, 0.1)
+        transform: Transform.translate(0, 0,100)
     });
 
     this.add(layoutModifier).add(this.layout);
@@ -89,18 +90,11 @@ function _createHeader() {
     this.layout.header.add(hamburgerModifier).add(this.hamburgerSurface);
     this.layout.header.add(titleModifier).add(titleSurface);
     this.layout.header.add(iconModifier).add(iconSurface);
-
 }
 
 function _createBody() {
-    this.bodySurface = new ImageSurface({
-        size : [undefined, undefined],
-        content : '/body.png'
-    });
-
-   // this.layout.content.add(this.bodySurface);
-    var homeView = new HomeView();
-    this.layout.content.add(homeView);
+    this.childView = new HomeView();
+    this.layout.content.add(this.childView);
 }
 
 function _setListeners() {
@@ -108,7 +102,10 @@ function _setListeners() {
         this._eventOutput.emit('menuToggle');
     }.bind(this));
 
-    this.bodySurface.pipe(this._eventOutput);
+    this.childView.on('loadEditor',function(){
+        console.log('load editor');
+        _createEditor.call(this);
+    });
 }
 
 function _createBacking() {
@@ -120,4 +117,8 @@ function _createBacking() {
     });
 
     this.add(backing);
+}
+
+function _createEditor(){
+    this.childView = new EditorView();
 }
